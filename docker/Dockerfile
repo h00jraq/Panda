@@ -1,3 +1,3 @@
 FROM busybox:latest
-CMD ["%d-%m-%y"]
+CMD ["+%T"]
 ENTRYPOINT ["date"]
