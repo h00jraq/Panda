@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <distributionManagement>
-    <repository>
-      <id>artifactory</id>
-      <name>release</name>
-      <url>http://192.168.44.44:8081/artifactory/libs-release-local</url>
-    </repository>
-    <snapshotRepository>
-      <id>artifactory</id>
-      <name>snapshots</name>
-      <url>http://192.168.44.44:8081/artifactory/libs-snapshot-local</url>
-    </snapshotRepository>
-  </distributionManagement>
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.springframework.boot</groupId>
@@ -23,12 +11,14 @@
   </parent>
   <groupId>pl.pandait</groupId>
   <artifactId>panda</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.2-SNAPSHOT</version>
   <name>panda</name>
   <description>Demo project for Spring Boot</description>
+
   <properties>
     <java.version>11</java.version>
   </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -38,12 +28,14 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.12</version>
       <scope>test</scope>
     </dependency>
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
@@ -55,12 +47,14 @@
         </exclusion>
       </exclusions>
     </dependency>
+
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-java</artifactId>
       <version>3.141.59</version>
     </dependency>
   </dependencies>
+
   <build>
     <plugins>
       <plugin>
@@ -77,8 +71,8 @@
             <include>PandaApplicationTest.java</include>
           </includes>
         </configuration>
-        <dependencies>          
-        <!-- let surefire run JUnit 4 but also JUnit 5 tests -->
+        <dependencies>
+          <!-- let surefire run JUnit 4 but also JUnit 5 tests -->
           <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-surefire-provider</artifactId>
@@ -88,6 +82,7 @@
       </plugin>
     </plugins>
   </build>
+
   <profiles>
     <profile>
       <id>docker</id>
@@ -106,9 +101,8 @@
                 </goals>
               </execution>
             </executions>
-            <configuration>              
-            <!-- <repository>${project.artifactId}</repository><tag>${project.version}</tag> -->
-              <repository>${artifactory.ip}:${artifactory.port}/docker1/${project.artifactId}</repository>
+            <configuration>
+              <repository>${project.artifactId}</repository>
               <tag>${project.version}</tag>
               <buildArgs>
                 <JAR_FILE>target/${project.artifactId}-${project.version}.jar</JAR_FILE>
@@ -125,6 +119,7 @@
         </plugins>
       </build>
     </profile>
+
     <profile>
       <id>selenium</id>
       <build>
@@ -143,4 +138,18 @@
       </build>
     </profile>
   </profiles>
+
+        <distributionManagement>
+                <repository>
+                        <id>artifactory</id>
+                        <name>release</name>
+                        <url>http://artifactorycompose:8081/artifactory/libs-release-local</url>
+                </repository>
+                <snapshotRepository>
+                        <id>artifactory</id>
+                        <name>snapshots</name>
+                        <url>http://artifactorycompose:8081/artifactory/libs-snapshot-local</url>
+                </snapshotRepository>
+        </distributionManagement>
+        
 </project>
