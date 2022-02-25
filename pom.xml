@@ -130,7 +130,7 @@
             <version>2.22.2</version>
             <configuration>
               <includes>
-                <include>**.*SeleniumTest.java</include>
+                <include>*SeleniumTest.java</include>
               </includes>
             </configuration>
           </plugin>

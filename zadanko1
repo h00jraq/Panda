@@ -1,0 +1,19 @@
+def zmienna = "test"
+
+zmienna = "antonowka"
+
+println zmienna
+
+def funkcja(arg1, arg2){
+println arg1
+println  arg2}
+
+funkcja("jablko", "gruszka")
+funkcja("cytryna", "pomarancza")
+
+
+def lista = ["pies", "kot", "niedzwiedz"]
+lista.each {element -> println element}
+
+def map = [name: "Filip", age: 32, city: "Wrocław"]
+map.each{entry -> println "$entry.key: #entry.value"}
