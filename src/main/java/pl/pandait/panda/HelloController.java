@@ -13,7 +13,7 @@ public class HelloController{
 		required=false, defaultValue="World")
 		String name, Model model){
 		model.addAttribute("name", name);
-		return"greeting_template";
+		return"greeting";
 	}
 }
 
