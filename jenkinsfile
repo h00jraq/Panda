@@ -6,6 +6,12 @@ pipeline {
         // Install the Maven version configured as "M3" and add it to the path.
         maven "auto_maven"
     }
+     environment {
+        MAGE = sh script: 'mvn help:evaluate -Dexpression=project.artifactid -q -DforceStdout', returnStdout: true
+        VERSION = sh script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
+        
+    }
+  
 
     stages {
         stage('Clear running apps') {
@@ -32,12 +38,19 @@ pipeline {
                 sh "mvn package -Pdocker"
             }
         }
+        stage('Run Docker app') {
+            steps {
+                sh "docker run -d -p 0.0.0.0:8080:8080 --name pandaapp -t ${IMAGE}:${VERSION}"
+            }
+        }
         stage('Test') {
             steps {
                 // Run Maven on a Unix agent.
                 sh "mvn test -Pselenium"
             }
-
+              configFileProvider([configFile(fileId: '3a7956c1-692c-48c1-82c8-cdf1b13c6582', variable: 'MAVEN_GLOBAL_SETTINGS')]) {
+              // some block
+            }
             post {
                 // If Maven was able to run the tests, even if some of the test
                 // failed, record the test results and archive the jar file.
