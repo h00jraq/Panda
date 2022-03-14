@@ -94,8 +94,8 @@ pipeline {
     post {
         success {
         sh 'docker stop pandapp'
-        deleteDir()}
-    }
+        deleteDir()
+        }
     failure {
         dir('infrastructure/terraform') { 
             withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'AWS']]) {
