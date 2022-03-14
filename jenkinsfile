@@ -105,4 +105,5 @@ pipeline {
         sh 'docker stop pandaapp'
         deleteDir()
         }
+    }
 }
