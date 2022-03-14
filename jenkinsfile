@@ -83,7 +83,7 @@ pipeline {
             steps {
                 input 'Remove environment'
                 dir('infrastructure/terraform') { 
-                    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'AWS']]) {
+                    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'AWS kredki']]) {
                         sh 'terraform destroy -auto-approve -var-file panda.tfvars'
                     }
                 }
