@@ -78,6 +78,7 @@ pipeline {
                steps {
                 dir('infrastructure/ansible') {                
                     sh 'chmod 600 ../panda.pem'
+                    sh 'sleep 180'
                     sh 'ansible-playbook -i ./inventory playbook.yml -e ansible_python_interpreter=/usr/bin/python3'
                 } 
             }
